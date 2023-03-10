@@ -22,7 +22,25 @@ Answer the following questions:
    assertEquals(s1, s2); // true
    assertSame(s1, s2); // false
    ```
-3. //TODO
+3. As the Javadoc described, the function `fail()` is to be used to fail a test without a failure message. The Javadoc also said that this function is designed for legacy code and it would be
+   better to use the variant `fail(String, Throwable)`.
+   
+   An example of this usage could be:
+
+   ```java
+   void someFunc(int arg) {
+     if (arg < 0) 
+       throw new RuntimeException();
+     ...
+   }
+   
+   @Test void testSomeFunc() {
+     ...
+     someFunc(-2);
+     fail();
+   }
+   ```
+
 4. In JUnit 4, the expected exception was specified in the `@Test` annotation, which is not very readable. 
    In JUnit 5, the expected exception is specified in the assertion method, which is more readable. 
    Also, the assertion method can be used in a lambda expression, which is not possible with the `@Test` annotation.
