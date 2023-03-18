@@ -15,14 +15,25 @@ public class StringUtils {
                 return true;
             } else {
                 for (var i = 0; i < str.length(); i++) {
-                    if (str.charAt(i) == '{' || str.charAt(i) == '[' || str.charAt(i) == '(') {
+                    if (List.of('{', '[', '(').contains(str.charAt(i))) {
                         stack.add(0, str.charAt(i));
-                    }
-                    if (str.charAt(i) == '}' || str.charAt(i) == ']' || str.charAt(i) == ')') {
+                    } else if (List.of('}', ']', ')').contains(str.charAt(i))) {
                         char last = stack.remove(0);
-                        if (str.charAt(i) != last) {
-                            return false;
+                        switch (last) {
+                            case '{':
+                                if (str.charAt(i) == '}')
+                                    break;
+                            case '[':
+                                if (str.charAt(i) == ']')
+                                    break;
+                            case '(':
+                                if (str.charAt(i) == ')')
+                                    break;
+                            default:
+                                return false;
                         }
+                    } else {
+                        return false;
                     }
                 }
                 return stack.isEmpty();
