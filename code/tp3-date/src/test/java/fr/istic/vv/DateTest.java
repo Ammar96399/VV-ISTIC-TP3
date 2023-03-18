@@ -97,16 +97,44 @@ class DateTest {
     }
 
     @Test
-    void CompareToDatePriorToAnother() {
+    void CompareToDatePriorToAnother1() {
         var date1 = new Date(13, 12, 1229);
         var date2 = new Date(7, 1, 1349);
         assertTrue(date1.compareTo(date2) < 0);
     }
 
     @Test
-    void CompareToDateGreaterToAnother() {
+    void CompareToDatePriorToAnother2() {
+        var date1 = new Date(13, 11, 1349);
+        var date2 = new Date(7, 12, 1349);
+        assertTrue(date1.compareTo(date2) < 0);
+    }
+
+    @Test
+    void CompareToDatePriorToAnother3() {
+        var date1 = new Date(1, 12, 1349);
+        var date2 = new Date(7, 12, 1349);
+        assertTrue(date1.compareTo(date2) < 0);
+    }
+
+    @Test
+    void CompareToDateGreaterToAnother1() {
+        var date1 = new Date(13, 11, 2033);
+        var date2 = new Date(7, 5, 1045);
+        assertTrue(date1.compareTo(date2) > 0);
+    }
+
+    @Test
+    void CompareToDateGreaterToAnother2() {
         var date1 = new Date(13, 11, 2033);
         var date2 = new Date(7, 5, 2033);
+        assertTrue(date1.compareTo(date2) > 0);
+    }
+
+    @Test
+    void CompareToDateGreaterToAnother3() {
+        var date1 = new Date(13, 11, 2033);
+        var date2 = new Date(7, 11, 2033);
         assertTrue(date1.compareTo(date2) > 0);
     }
 
