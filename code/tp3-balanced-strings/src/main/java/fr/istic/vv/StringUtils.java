@@ -13,21 +13,15 @@ public class StringUtils {
         if (Objects.nonNull(str)) {
             if (str.equals("")) {
                 return true;
-            } else if (str.length() < 2) {
-                return false;
             } else {
                 for (var i = 0; i < str.length(); i++) {
                     if (str.charAt(i) == '{' || str.charAt(i) == '[' || str.charAt(i) == '(') {
                         stack.add(0, str.charAt(i));
                     }
                     if (str.charAt(i) == '}' || str.charAt(i) == ']' || str.charAt(i) == ')') {
-                        if (stack.isEmpty()) {
+                        char last = stack.remove(0);
+                        if (str.charAt(i) != last) {
                             return false;
-                        } else {
-                            char last = stack.remove(0);
-                            if (str.charAt(i) != last) {
-                                return false;
-                            }
                         }
                     }
                 }
