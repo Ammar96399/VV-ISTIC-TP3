@@ -18,17 +18,27 @@ class Date implements Comparable<Date> {
     }
 
     public Date(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        if (isValidDate(day, month, year)) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        } else {
+            throw new IllegalStateException("Attempt to create a date which is not valid");
+        }
     }
 
     public static boolean isValidDate(int day, int month, int year) {
+        if (year < 0) {
+            return false;
+        }
+        if (month <= 0 || month > 12) {
+            return false;
+        }
         int _daysInMonth = Date.daysInMonthOf(month, year);
         return 1 <= day && day <= _daysInMonth;
     }
 
-    public static boolean isLeapYear(int year) { return year % 4 != 0 || year % 400 != 0 && year % 100 == 0; }
+    public static boolean isLeapYear(int year) { return !((year % 4 != 0) || (year % 400 != 0 && year % 100 == 0)); }
 
     public Date nextDate() {
         if (this.month == 12 && this.day == 31) {
